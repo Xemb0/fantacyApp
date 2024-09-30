@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "48066731631",
+    "project_id": "chromium-fe846",
+    "storage_bucket": "chromium-fe846.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48066731631:android:cc8e3a33e795b82664f79a",
+        "android_client_info": {
+          "package_name": "com.autobot.chromium"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2Hi7HpQvn9E0niRU2ee0xSohNUukWud4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
