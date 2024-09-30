@@ -2,13 +2,17 @@ package com.autobot.chromium
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -16,8 +20,9 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,6 +41,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
@@ -56,7 +65,7 @@ fun BrowserScreen(viewModel: BrowserViewModel) {
     val scope = rememberCoroutineScope()
     val tabs by remember { mutableStateOf(viewModel.tabs) }
     var newTabUrl by remember { mutableStateOf("") }
-    var currentTabUrl by remember { mutableStateOf("") } // Holds the URL of the currently selected tab
+    var currentTabUrl by remember { mutableStateOf("") }
 
     LaunchedEffect(newTabUrl) {
         if (newTabUrl.isNotBlank()) {
@@ -67,51 +76,89 @@ fun BrowserScreen(viewModel: BrowserViewModel) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         // Tab Row
-        TabRow(selectedTabIndex = viewModel.selectedTabIndex) {
-            tabs.forEachIndexed { index, url ->
+        TabRow(modifier = Modifier.height(70.dp), selectedTabIndex = viewModel.selectedTabIndex) {
+            tabs.forEachIndexed { index, tabState ->
                 Tab(
+                    modifier = Modifier.border(width = 1.dp, color = Color.Gray),
                     selected = viewModel.selectedTabIndex == index,
                     onClick = {
                         viewModel.selectTab(index)
-                        currentTabUrl = url // Update the current tab URL
+                        currentTabUrl = tabState.url
                     },
-                    text = { Text(url) }
+                    text = {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Column(
+                                modifier = Modifier,
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(text = tabState.url, color = Color.Black,modifier = Modifier, maxLines = 1) // Tab Text
+                            }
+                            Column(
+                                modifier = Modifier,
+                                verticalArrangement = Arrangement.Top,
+                                horizontalAlignment = Alignment.End
+                            ) {
+                                IconButton(onClick = {
+                                    viewModel.closeTab(index) // Close tab when cross is clicked
+                                }) {
+                                    Icon(
+                                        modifier = Modifier.size(20.dp),
+                                        imageVector = Icons.Default.Clear, // Use your close icon
+                                        contentDescription = "Close Tab",
+                                        tint = Color.Red // Color for close icon
+                                    )
+                                }
+                            }
+                        }
+                    }
                 )
             }
         }
+
         Row(modifier = Modifier.weight(1f)) {
-            // Show the browser with tabs and update with the search text
             if (isSearching) {
-                BrowserWithTabs(searchText,isSearching = false) // Use your custom composable for showing results
+                BrowserWithTabs(searchText, isSearching = false)
             } else {
                 if (currentTabUrl.isBlank()) {
                     BrowserHomePage() // Shows the homepage if no search text
                 } else {
-                    BrowserWithTabs(currentTabUrl,isSearching = true) // Show the current tab URL content
+                    BrowserWithTabs(currentTabUrl, isSearching = true)
                 }
             }
         }
-
 
         SearchBar(
             searchText = searchText,
             onTextChange = { searchText = it },
             onAddTab = { newTabUrl = "Home" },
             onMenuClick = {
-                // Show bottom sheet on menu click
                 scope.launch {
                     showBottomSheet = true
                 }
             },
             onSearch = { query ->
-                searchText = query  // Update the searchText with the query
-                isSearching = true  // Set searching state to true
-                currentTabUrl = query // Update current tab URL with search query
+                searchText = query
+                isSearching = true
+                currentTabUrl = query
             }
         )
     }
-}
 
+    // Modal Bottom Sheet
+    if (showBottomSheet) {
+        androidx.compose.material3.ModalBottomSheet(
+            sheetState = sheetState,
+            onDismissRequest = {
+                scope.launch {
+                    showBottomSheet = false
+                }
+            }
+        ) {
+            BottomSheetContent()
+        }
+    }
+}
 @Composable
 fun SearchBar(
     searchText: String,
@@ -142,8 +189,9 @@ fun SearchBar(
                             shape = RoundedCornerShape(8.dp)
                         )
                 ) {
-                    Icon(
-                        Icons.Default.Settings,
+                    Image(
+                        painter =
+                        painterResource(id = R.drawable.ic_google),
                         contentDescription = "More Options",
                         modifier = Modifier
                             .padding(8.dp)
@@ -182,6 +230,99 @@ fun SearchBar(
                 }
             }
         }
+    }
+}
+
+
+@Preview
+@Composable
+fun BottomSheetContent() {
+Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(horizontal = 4.dp, vertical = 16.dp)
+            .background(
+                color = MyAppThemeColors.current.tertiaryDark,
+                shape = RoundedCornerShape(24.dp)
+            )
+            .padding(horizontal = 4.dp, vertical = 16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+
+        // First Row of icons
+        Row(
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            IconColumn(imageVector = Icons.Outlined.Star, label = "Website")
+            IconColumn(painter = painterResource(id = R.drawable.ic_download), label = "Download")
+            IconColumn(painter = painterResource(id = R.drawable.ic_recent), label = "Recent")
+            IconColumn(painter = painterResource(id = R.drawable.ic_settings), label = "Settings")
+        }
+
+        androidx.compose.material3.HorizontalDivider(
+            modifier = Modifier.padding(vertical = 8.dp),
+            thickness = 1.dp,
+            color = MyAppThemeColors.current.myText
+        )
+        // Second Row of icons
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            IconColumn(painter = painterResource(id = R.drawable.ic_exit), label = "Exit")
+            IconColumn(painter = painterResource(id = R.drawable.ic_incognito), label = "Incognito")
+            IconColumn(painter = painterResource(id = R.drawable.ic_share), label = "Share")
+            IconColumn(painter = painterResource(id = R.drawable.ic_dark_mode), label = "Dark Mode")
+        }
+
+        // Third Row of icons
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            IconColumn(painter = painterResource(id = R.drawable.ic_desktop_mode), label = "Desktop Mode")
+            IconColumn(painter = painterResource(id = R.drawable.ic_help_feedback), label = "Help")
+            IconColumn(painter = painterResource(id = R.drawable.ic_find_onpage), label = "Find")
+            IconColumn(painter = painterResource(id = R.drawable.ic_delete), label = "Delete")
+        }
+    }
+}
+
+@Composable
+fun IconColumn(
+    imageVector: ImageVector? = null,
+    painter: Painter? = null,
+    label: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .clip(RoundedCornerShape(24.dp))
+            .clickable { }
+            .padding(8.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        if (imageVector != null) {
+            Image(
+                imageVector = imageVector,
+                contentDescription = label,
+                modifier = Modifier.size(40.dp)
+            )
+        } else if (painter != null) {
+            Image(
+                painter = painter,
+                contentDescription = label,
+                modifier = Modifier.size(50.dp)
+            )
+        }
+        Text(label, fontSize = 16.sp)
     }
 }
 

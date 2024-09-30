@@ -4,7 +4,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,15 +13,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
@@ -38,10 +33,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -146,7 +139,6 @@ fun BrowserUI(
             sheetState = sheetState,
             modifier = Modifier.background(MyAppThemeColors.current.tertiaryDark)
         ) {
-            BottomSheetContent()
         }
     }
 }
@@ -247,106 +239,6 @@ fun VoiceSearchBar(
     }
 }
 
-
-@Preview
-@Composable
-fun BottomSheetContent() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(horizontal = 4.dp, vertical = 16.dp)
-            .background(
-                color = MyAppThemeColors.current.tertiaryDark,
-                shape = RoundedCornerShape(24.dp)
-            )
-            .padding(horizontal = 4.dp, vertical = 16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        // Top drag handle
-        HorizontalDivider(
-            modifier = Modifier
-                .width(80.dp)
-                .padding(vertical = 8.dp)
-                .clip(RoundedCornerShape(48.dp)),
-            thickness = 6.dp,
-            color = MyAppThemeColors.current.myText
-        )
-
-        // First Row of icons
-        Row(
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            IconColumn(imageVector = Icons.Outlined.Star, label = "Website")
-            IconColumn(painter = painterResource(id = R.drawable.ic_download), label = "Download")
-            IconColumn(painter = painterResource(id = R.drawable.ic_recent), label = "Recent")
-            IconColumn(painter = painterResource(id = R.drawable.ic_settings), label = "Settings")
-        }
-
-        HorizontalDivider(
-            modifier = Modifier.padding(vertical = 8.dp),
-            thickness = 1.dp,
-            color = MyAppThemeColors.current.myText
-        )
-        // Second Row of icons
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            IconColumn(painter = painterResource(id = R.drawable.ic_exit), label = "Exit")
-            IconColumn(painter = painterResource(id = R.drawable.ic_incognito), label = "Incognito")
-            IconColumn(painter = painterResource(id = R.drawable.ic_share), label = "Share")
-            IconColumn(painter = painterResource(id = R.drawable.ic_dark_mode), label = "Dark Mode")
-        }
-
-        // Third Row of icons
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            IconColumn(painter = painterResource(id = R.drawable.ic_desktop_mode), label = "Desktop Mode")
-            IconColumn(painter = painterResource(id = R.drawable.ic_help_feedback), label = "Help")
-            IconColumn(painter = painterResource(id = R.drawable.ic_find_onpage), label = "Find")
-            IconColumn(painter = painterResource(id = R.drawable.ic_delete), label = "Delete")
-        }
-    }
-}
-
-@Composable
-fun IconColumn(
-    imageVector: ImageVector? = null,
-    painter: Painter? = null,
-    label: String,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier
-            .clip(RoundedCornerShape(24.dp))
-            .clickable { }
-            .padding(8.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        if (imageVector != null) {
-            Image(
-                imageVector = imageVector,
-                contentDescription = label,
-                modifier = Modifier.size(40.dp)
-            )
-        } else if (painter != null) {
-            Image(
-                painter = painter,
-                contentDescription = label,
-                modifier = Modifier.size(50.dp)
-            )
-        }
-        Text(label, fontSize = 16.sp)
-    }
-}
 
 @Composable
 fun HorizontalDivider(
