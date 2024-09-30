@@ -1,4 +1,4 @@
-package com.autobot.chromium
+package com.autobot.chromium.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -52,6 +52,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.autobot.chromium.R
 import com.autobot.chromium.theme.MyAppThemeColors
 import kotlinx.coroutines.launch
 
@@ -76,10 +77,12 @@ fun BrowserScreen(viewModel: BrowserViewModel) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         // Tab Row
-        TabRow(modifier = Modifier.height(70.dp), selectedTabIndex = viewModel.selectedTabIndex) {
+        TabRow(modifier = Modifier.height(70.dp).background(color = Color.Black), selectedTabIndex = viewModel.selectedTabIndex) {
             tabs.forEachIndexed { index, tabState ->
-                Tab(
-                    modifier = Modifier.border(width = 1.dp, color = Color.Gray),
+                Tab(selectedContentColor = Color.Black,
+                    modifier = Modifier
+                        .border(width = 1.dp, color = Color.Gray).padding(2.dp)
+                        .background(color = MyAppThemeColors.current.tertiaryDark),
                     selected = viewModel.selectedTabIndex == index,
                     onClick = {
                         viewModel.selectTab(index)
@@ -278,7 +281,7 @@ Column(
             IconColumn(painter = painterResource(id = R.drawable.ic_exit), label = "Exit")
             IconColumn(painter = painterResource(id = R.drawable.ic_incognito), label = "Incognito")
             IconColumn(painter = painterResource(id = R.drawable.ic_share), label = "Share")
-            IconColumn(painter = painterResource(id = R.drawable.ic_dark_mode), label = "Dark Mode")
+            IconColumn(painter = painterResource(id = R.drawable.ic_dark_mode), label = "Dark M")
         }
 
         // Third Row of icons
@@ -286,7 +289,7 @@ Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            IconColumn(painter = painterResource(id = R.drawable.ic_desktop_mode), label = "Desktop Mode")
+            IconColumn(painter = painterResource(id = R.drawable.ic_desktop_mode), label = "Desktop")
             IconColumn(painter = painterResource(id = R.drawable.ic_help_feedback), label = "Help")
             IconColumn(painter = painterResource(id = R.drawable.ic_find_onpage), label = "Find")
             IconColumn(painter = painterResource(id = R.drawable.ic_delete), label = "Delete")

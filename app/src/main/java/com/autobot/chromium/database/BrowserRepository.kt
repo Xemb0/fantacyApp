@@ -1,4 +1,4 @@
-package com.autobot.chromium
+package com.autobot.chromium.database
 
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.autobot.chromium.theme.MyAppThemeComposable
+import com.autobot.chromium.ui.Homepage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.Serializable
 

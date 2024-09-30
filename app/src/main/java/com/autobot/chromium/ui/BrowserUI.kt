@@ -1,9 +1,13 @@
-package com.autobot.chromium
+package com.autobot.chromium.ui
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +39,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,6 +49,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
+import com.autobot.chromium.R
 import com.autobot.chromium.theme.MyAppThemeColors
 import kotlinx.coroutines.launch
 
@@ -170,14 +176,15 @@ fun BrowserHome(){
             fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .padding(8.dp)
-                .weight(1f)  // Give weight to the text to push the third icon to the end
+                .weight(1f) // Give weight to the text to push the third icon to the end
         )
 
         Row (modifier = Modifier.padding(12.dp).background(color = MyAppThemeColors.current.tertiaryDark , shape = RoundedCornerShape(24.dp)).padding(8.dp) , verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center){
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                painter = painterResource(id = R.drawable.ic_wether),
                 contentDescription = "Icon with image",
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(20.dp),
+
             )
             Text("28 C" , fontSize = 16.sp)
         }
@@ -192,22 +199,42 @@ fun BrowserHome(){
 
 }
 
+data class Website(val name: String, val iconResId: Int, val url: String)
+
 @Composable
-fun RecentWebsites(){
-    LazyRow { // LazyRow to display items horizontally
-        items(10) { index ->
-            // Display 10 items
+fun RecentWebsites() {
+    val context = LocalContext.current
+    // List of websites with their name, icon, and URL
+    val websites = listOf(
+        Website("Google", R.drawable.ic_google, "https://www.google.com"),
+        Website("YouTube", R.drawable.ic_youtube, "https://www.youtube.com"),
+        Website("Facebook", R.drawable.ic_facebook, "https://www.facebook.com"),
+        Website("Github", R.drawable.ic_github, "https://www.github.com"),
+        Website("Instagram", R.drawable.ic_chromium, "https://www.instagram.com"),
+        Website("LinkedIn", R.drawable.ic_chromium, "https://www.linkedin.com"),
+        Website("Reddit", R.drawable.ic_chromium, "https://www.reddit.com"),
+        Website("Github", R.drawable.ic_share, "https://www.github.com"),
+        Website("Wikipedia", R.drawable.ic_chromium, "https://www.wikipedia.org"),
+        Website("Amazon", R.drawable.ic_chromium, "https://www.amazon.com")
+    )
+
+    LazyRow(modifier = Modifier.padding(vertical = 24.dp)) {
+        items(websites.size) { index ->  // Correct usage: pass the size of the list
+            val website = websites[index]  // Get the current website from the list
             Column(
-                modifier = Modifier.padding(8.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(8.dp)
+                    .clickable { openWebsite(website.url, context = context) }
+                    .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_chromium),
-                    contentDescription = "Icon with image",
+                    painter = painterResource(id = website.iconResId),  // Use the correct resource ID
+                    contentDescription = "Icon of ${website.name}",
                     modifier = Modifier.size(50.dp)
                 )
                 Text(
-                    "Website $index",
+                    website.name, color = Color.White,
                     fontSize = 16.sp
                 )
             }
@@ -215,8 +242,10 @@ fun RecentWebsites(){
     }
 }
 
-
-
+fun openWebsite(url: String,context: Context) {
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    context.startActivity(intent)
+}
 @Composable
 fun VoiceSearchBar(
     modifier: Modifier = Modifier,

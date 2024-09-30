@@ -1,7 +1,6 @@
-package com.autobot.chromium
+package com.autobot.chromium.database
 
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 
 class MainViewModel  : ViewModel() {

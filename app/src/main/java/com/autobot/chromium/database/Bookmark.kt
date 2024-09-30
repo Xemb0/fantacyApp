@@ -1,4 +1,4 @@
-package com.autobot.chromium
+package com.autobot.chromium.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

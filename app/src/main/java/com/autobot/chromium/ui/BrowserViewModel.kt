@@ -1,4 +1,4 @@
-package com.autobot.chromium
+package com.autobot.chromium.ui
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue

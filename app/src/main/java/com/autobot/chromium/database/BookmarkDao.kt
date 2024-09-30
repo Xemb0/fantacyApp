@@ -1,4 +1,4 @@
-package com.autobot.chromium
+package com.autobot.chromium.database
 
 import androidx.room.Dao
 import androidx.room.Insert

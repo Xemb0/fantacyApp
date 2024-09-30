@@ -1,4 +1,4 @@
-package com.autobot.chromium
+package com.autobot.chromium.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview

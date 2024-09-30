@@ -1,4 +1,4 @@
-package com.autobot.chromium
+package com.autobot.chromium.ui
 
 data class Tab(
     val url: String,

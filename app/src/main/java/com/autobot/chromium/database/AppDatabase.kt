@@ -1,4 +1,4 @@
-package com.autobot.chromium
+package com.autobot.chromium.database
 
 import android.content.Context
 import androidx.room.Database

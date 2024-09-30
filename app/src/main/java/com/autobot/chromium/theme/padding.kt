@@ -1,7 +1,6 @@
 package com.autobot.chromium.theme
 
 import androidx.compose.ui.unit.dp
-import com.autobot.chromium.theme.MyAppSizes
 
 val padding = MyAppSizes(
     xsmall = 2.dp,
