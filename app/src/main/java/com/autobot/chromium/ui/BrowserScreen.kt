@@ -77,7 +77,7 @@ fun BrowserScreen(viewModel: BrowserViewModel) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         // Tab Row
-        TabRow(modifier = Modifier.height(70.dp).background(color = Color.Black), selectedTabIndex = viewModel.selectedTabIndex) {
+        TabRow(containerColor = MyAppThemeColors.current.tertiary, modifier = Modifier.height(70.dp).background(color = Color.Black), selectedTabIndex = viewModel.selectedTabIndex) {
             tabs.forEachIndexed { index, tabState ->
                 Tab(selectedContentColor = Color.Black,
                     modifier = Modifier
@@ -124,7 +124,13 @@ fun BrowserScreen(viewModel: BrowserViewModel) {
                 BrowserWithTabs(searchText, isSearching = false)
             } else {
                 if (currentTabUrl.isBlank()) {
-                    BrowserHomePage() // Shows the homepage if no search text
+                    BrowserHomePage(
+                        onRecentClick = {
+                            newTabUrl = it
+                            isSearching = true
+                        }
+                        )
+                // Shows the homepage if no search text
                 } else {
                     BrowserWithTabs(currentTabUrl, isSearching = true)
                 }
@@ -330,9 +336,8 @@ fun IconColumn(
 }
 
 
-@Preview
 @Composable
-fun BrowserHomePage() {
+fun BrowserHomePage(onRecentClick: (String) -> Unit) {
     // Replace R.drawable.your_background_image with your actual image resource
     val backgroundImage = painterResource(id = R.drawable.bg)
 
@@ -353,7 +358,10 @@ fun BrowserHomePage() {
         ) {
             BrowserHome()
             VoiceSearchBar(modifier = Modifier.weight(1f)) { }
-            RecentWebsites()
+            RecentWebsites(onclick = {
+                onRecentClick(it)
+
+        })
         }
     }
 }

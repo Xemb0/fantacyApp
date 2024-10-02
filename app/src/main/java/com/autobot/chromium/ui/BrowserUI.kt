@@ -112,7 +112,9 @@ fun BrowserUI(
             ) {
                 // Show the browser with tabs and update with the search text
                 if (searchText.isBlank() || !isSearching) {
-                    BrowserHomePage()  // Shows the homepage if no search text
+                    BrowserHomePage(onRecentClick = {
+
+                    })  // Shows the homepage if no search text
                 } else {
                     BrowserWithTabs(searchText, isSearching)  // Pass the search state
                 }
@@ -202,7 +204,7 @@ fun BrowserHome(){
 data class Website(val name: String, val iconResId: Int, val url: String)
 
 @Composable
-fun RecentWebsites() {
+fun RecentWebsites(onclick: (String) -> Unit) {
     val context = LocalContext.current
     // List of websites with their name, icon, and URL
     val websites = listOf(
@@ -224,7 +226,7 @@ fun RecentWebsites() {
             Column(
                 modifier = Modifier
                     .padding(8.dp)
-                    .clickable { openWebsite(website.url, context = context) }
+                    .clickable { onclick(website.url) }
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
