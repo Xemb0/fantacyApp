@@ -3,6 +3,7 @@ package com.autobot.chromium
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -10,15 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.autobot.chromium.database.WebBrowserViewModel
 import com.autobot.chromium.theme.MyAppThemeComposable
-import com.autobot.chromium.ui.Homepage
+import com.autobot.chromium.ui.HomePage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.Serializable
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-//    val mainViewModel: MainViewModel by viewModels()
+    val mainViewModel: WebBrowserViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +43,8 @@ class MainActivity : ComponentActivity() {
 
 
                         composable<HomePage> {
-                            Homepage(
+                            HomePage(
+                                viewModel = mainViewModel
 //                                onSignUpClick = { userData ->
 //                                    navController.navigate(
 //                                        NavScreenCreateRoom(

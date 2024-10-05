@@ -1,57 +1,29 @@
-package com.autobot.chromium.ui
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
-
-data class TabState(val url: String)
+import com.autobot.chromium.database.BrowserTab
+import java.util.UUID
 
 class BrowserViewModel : ViewModel() {
-    var tabs = mutableListOf<TabState>()
-        private set
+    private val _tabs = mutableStateListOf<BrowserTab>()
+    val tabs: List<BrowserTab> get() = _tabs
 
-    var selectedTabIndex by mutableStateOf(0)
-
+    // Default to one initial tab with a home URL
     init {
-        // Add an initial tab with a default URL
-        addTab("http://google.com")
+        addTab("https://yourhomepage.com")
     }
 
-    fun addTab(url: String) {
-        tabs.add(TabState(url))
-        selectedTabIndex = tabs.size - 1 // Select the new tab
+    // Add a new tab
+    fun addTab(url: String = "https://yourhomepage.com") {
+        _tabs.add(BrowserTab(UUID.randomUUID().toString(), url))
     }
 
-    fun selectTab(index: Int) {
-        if (index in tabs.indices) {
-            selectedTabIndex = index
-        }
+    // Remove an existing tab
+    fun removeTab(tabId: String) {
+        _tabs.removeAll { it.id == tabId }
     }
 
-    fun getCurrentTabUrl(): String {
-        return if (tabs.isNotEmpty()) {
-            tabs[selectedTabIndex].url
-        } else {
-            "" // Return an empty string if no tabs are present
-        }
+    // Update the URL of a particular tab
+    fun updateUrl(tabId: String, newUrl: String) {
+        _tabs.find { it.id == tabId }?.url = newUrl
     }
-
-    fun updateTabUrl(index: Int, url: String) {
-        if (index in tabs.indices) {
-            tabs[index] = TabState(url)
-        }
-    }
-
-    fun closeTab(index: Int) {
-        if (index in tabs.indices) {
-            tabs.removeAt(index) // Remove the tab from the list
-            // Update selected tab index
-            if (tabs.isEmpty()) {
-                selectedTabIndex = 0 // Reset to first tab if empty
-            } else if (selectedTabIndex >= tabs.size) {
-                selectedTabIndex = tabs.size - 1 // Adjust if the last tab is closed
-            }
-        }
-    }
-
 }
