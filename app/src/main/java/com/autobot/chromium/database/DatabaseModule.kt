@@ -1,38 +1,29 @@
 package com.autobot.chromium.database
 
 import android.content.Context
-import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext context: Context) = ChromiumDataBase.getInstance(context)
+
+    @Provides
+    fun provideRecipeDao(appDatabase: ChromiumDataBase): TabDao {
+        return appDatabase.tabDao()
+    }
+
 
     @Provides
     @Singleton
-    fun provideDatabase(context: Context): ChromiumDatabase {
-        return Room.databaseBuilder(
-            context.applicationContext,
-            ChromiumDatabase::class.java,
-            "app_database"
-        ).build()
+    fun provideBrowserRepository(tabDao: TabDao): BrowserRepository {
+        return BrowserRepository(tabDao)
     }
-
-    @Provides
-    @ViewModelScoped
-    fun provideUserDao(database: ChromiumDatabase): BookmarkDao {
-        return database.bookmarkDao()
-    }
-
-    @Provides
-    @ViewModelScoped
-    fun provideBrowserRepository(): BrowserRepository {
-        return BrowserRepository()
-    }
-
 }

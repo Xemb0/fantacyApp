@@ -2,21 +2,28 @@ package com.autobot.chromium.database
 
 import android.webkit.WebView
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
-import kotlin.random.Random
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WebBrowserViewModel : ViewModel() {
+@HiltViewModel
+class WebBrowserViewModel @Inject constructor(private val repository: TabRepository) : ViewModel() {
     var tabs = mutableStateListOf<TabData>()
     private val webViewMap = mutableMapOf<Int, WebViewHolder>()
-
     init {
-        // Initialize with one tab
-        addTab("Tab 1", "https://www.google.com")
+        viewModelScope.launch {
+            tabs.addAll(repository.getAllTabs())
+        }
     }
 
     fun addTab(name: String, url: String) {
-        tabs.add(TabData(name, Color(Random.nextFloat(), Random.nextFloat(), Random.nextFloat()), url))
+        val tab = TabData(name = name, url = url)
+        viewModelScope.launch {
+            repository.addTab(tab)
+            tabs.add(tab)
+        }
     }
 
     fun getWebViewHolder(index: Int): WebViewHolder {
@@ -28,5 +35,4 @@ class WebBrowserViewModel : ViewModel() {
     }
 }
 class WebViewHolder(var webView: WebView? = null, var currentUrl: String? = null)
-data class TabData(val name: String, val color: Color, val url: String)
 

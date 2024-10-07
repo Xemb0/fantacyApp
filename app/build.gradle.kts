@@ -119,6 +119,11 @@ dependencies {
 
     implementation(libs.kotlinx.coroutines.core)
     implementation("androidx.webkit:webkit:1.8.0")
+    kapt ("android.arch.persistence.room:compiler:1.1.1")
+
+    implementation ("androidx.room:room-runtime:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
 
 
 }
