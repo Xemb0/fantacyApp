@@ -1,6 +1,5 @@
 package com.autobot.chromium.ui
 
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -57,7 +56,6 @@ fun Crousal() {
         MatchCard("T20 World Cup", "DC vs MI", "30m:15s", "Top Running Rank: $actualPage")
     }
 
-    Spacer(modifier = Modifier.height(16.dp))
     DotIndicatorWithAnimation(
         totalDots = totalPages,
         selectedIndex = pagerState.currentPage % totalPages
