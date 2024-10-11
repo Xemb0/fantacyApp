@@ -42,8 +42,7 @@ class MainActivity : ComponentActivity() {
                     ) {
 
 
-                        composable<HomePage> {
-                            HomePage(
+                        composable<HomePage> {HomePage(
                                 viewModel = mainViewModel
 //                                onSignUpClick = { userData ->
 //                                    navController.navigate(
