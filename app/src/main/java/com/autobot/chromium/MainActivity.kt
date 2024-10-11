@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.autobot.chromium.database.WebBrowserViewModel
+import com.autobot.chromium.database.ViewModel
 import com.autobot.chromium.theme.MyAppThemeComposable
 import com.autobot.chromium.ui.HomePage
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ import kotlinx.serialization.Serializable
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    val mainViewModel: WebBrowserViewModel by viewModels()
+    private val mainViewModel: ViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

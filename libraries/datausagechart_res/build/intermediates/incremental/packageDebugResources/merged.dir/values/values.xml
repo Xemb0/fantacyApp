@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="compressed_series" type="id"/>
+    <item name="original_series" type="id"/>
+    <string name="app_name">datausagechart_res</string>
+    <declare-styleable name="ChartNetworkSeriesView">
+        <attr format="color" name="strokeColor"/>
+        <attr format="color" name="fillColor"/>
+        <attr format="color" name="fillColorSecondary"/>
+    </declare-styleable>
+    <declare-styleable name="ChartView">
+        <!-- optimal width of the chart -->
+        <attr format="dimension" name="optimalWidth"/>
+        <!-- how to weight extra space beyond optimal width -->
+        <attr format="float" name="optimalWidthWeight"/>
+    </declare-styleable>
+</resources>

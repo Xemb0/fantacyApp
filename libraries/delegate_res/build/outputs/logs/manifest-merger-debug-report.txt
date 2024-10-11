@@ -1,0 +1,23 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml:1:1-9:12
+INJECTED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml:1:1-9:12
+	package
+		ADDED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml:2:5-68
+		INJECTED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml:4:5-7:19
+	android:supportsRtl
+		ADDED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml:5:9-35
+	android:label
+		ADDED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml:4:18-50
+uses-sdk
+INJECTED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml
+INJECTED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/xembo/AndroidStudioProjects/Chromium/libraries/delegate_res/src/main/AndroidManifest.xml

@@ -1,0 +1,13 @@
+org.chromium.third_party.android.media
+color cast_media_controller_text
+id ffwd
+id mediacontroller_progress_bar
+id mediacontroller_progress_container
+id next
+id pause
+id prev
+id rew
+id time
+id time_current
+layout media_controller
+string app_name

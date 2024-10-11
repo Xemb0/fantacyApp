@@ -1,0 +1,5 @@
+R_DEF: Internal format may change without notice
+local
+integer google_play_services_version
+string app_name
+string common_google_play_services_unknown_issue

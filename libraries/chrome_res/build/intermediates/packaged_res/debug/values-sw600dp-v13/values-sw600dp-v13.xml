@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="compositor_tab_title_fake_bold_text">false</bool>
+    <bool name="is_large_tablet">false</bool>
+    <bool name="is_tablet">true</bool>
+    <dimen name="clear_browsing_data_button_margin">16dp</dimen>
+    <dimen name="compositor_tab_title_text_size">14sp</dimen>
+    <dimen name="context_menu_header_image_max_size">216dp</dimen>
+    <dimen name="control_container_height">96dp</dimen>
+    <dimen name="custom_tabs_control_container_height">64dp</dimen>
+    <dimen name="data_usage_chart_height">325dp</dimen>
+    <dimen name="location_bar_icon_width">40dp</dimen>
+    <dimen name="menu_negative_software_vertical_offset">6dp</dimen>
+    <dimen name="ntp_logo_height">180dp</dimen>
+    <dimen name="ntp_search_box_transition_length">60dp</dimen>
+    <dimen name="omnibox_suggestion_list_padding_bottom">8dp</dimen>
+    <dimen name="omnibox_suggestion_list_padding_top">8dp</dimen>
+    <dimen name="payments_ui_max_dialog_width">600dp</dimen>
+    <dimen name="pref_spinner_padding_end">16dp</dimen>
+    <dimen name="recent_tabs_visible_separator_padding">28dp</dimen>
+    <dimen name="search_activity_location_bar_margin_end">4dp</dimen>
+    <dimen name="search_activity_location_bar_margin_start">0dp</dimen>
+    <dimen name="tab_strip_and_toolbar_height">96dp</dimen>
+    <dimen name="tab_strip_height">40dp</dimen>
+    <dimen name="tab_title_favicon_end_padding">5dp</dimen>
+    <dimen name="tab_title_favicon_start_padding">0dp</dimen>
+    <item format="float" name="top_controls_hide_threshold" type="dimen">0.17</item>
+    <item format="float" name="top_controls_show_threshold" type="dimen">0.27</item>
+    <dimen name="webapp_splash_large_title_margin_bottom">8dp</dimen>
+    <dimen name="webapp_splash_offset">48dp</dimen>
+    <integer name="default_approximation_thumbnail_cache_size">32</integer>
+    <integer name="default_compression_queue_size">3</integer>
+    <integer name="default_thumbnail_cache_size">3</integer>
+    <integer name="default_write_queue_size">3</integer>
+</resources>

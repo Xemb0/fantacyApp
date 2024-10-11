@@ -1,0 +1,15 @@
+int attr fillColor 0x0
+int attr fillColorSecondary 0x0
+int attr optimalWidth 0x0
+int attr optimalWidthWeight 0x0
+int attr strokeColor 0x0
+int id compressed_series 0x0
+int id original_series 0x0
+int string app_name 0x0
+int[] styleable ChartNetworkSeriesView { 0x0, 0x0, 0x0 }
+int styleable ChartNetworkSeriesView_fillColor 0
+int styleable ChartNetworkSeriesView_fillColorSecondary 1
+int styleable ChartNetworkSeriesView_strokeColor 2
+int[] styleable ChartView { 0x0, 0x0 }
+int styleable ChartView_optimalWidth 0
+int styleable ChartView_optimalWidthWeight 1

@@ -1,0 +1,12 @@
+R_DEF: Internal format may change without notice
+local
+attr? fillColor
+attr? fillColorSecondary
+attr? optimalWidth
+attr? optimalWidthWeight
+attr? strokeColor
+id compressed_series
+id original_series
+string app_name
+styleable ChartNetworkSeriesView strokeColor fillColor fillColorSecondary
+styleable ChartView optimalWidth optimalWidthWeight

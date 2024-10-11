@@ -1,0 +1,11 @@
+org.chromium.third_party.android.datausagechart
+attr fillColor
+attr fillColorSecondary
+attr optimalWidth
+attr optimalWidthWeight
+attr strokeColor
+id compressed_series
+id original_series
+string app_name
+styleable ChartNetworkSeriesView fillColor fillColorSecondary strokeColor
+styleable ChartView optimalWidth optimalWidthWeight

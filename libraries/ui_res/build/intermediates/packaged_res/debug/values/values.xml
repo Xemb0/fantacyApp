@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dropdown_dark_divider_color">#C0C0C0</color>
+    <color name="dropdown_divider_color">#E5E5E5</color>
+    <dimen name="config_min_scaling_span">12.0mm</dimen>
+    <dimen name="dropdown_icon_margin">8dp</dimen>
+    <dimen name="dropdown_item_divider_height">1px</dimen>
+    <dimen name="dropdown_item_height">50dp</dimen>
+    <dimen name="dropdown_item_label_font_size">18sp</dimen>
+    <dimen name="dropdown_item_label_margin">10dp</dimen>
+    <dimen name="dropdown_item_sublabel_font_size">14sp</dimen>
+    <item name="dropdown_popup_window" type="id"/>
+    <string name="accessibility_date_picker_month">"Month"</string>
+    <string name="accessibility_date_picker_week">"Week"</string>
+    <string name="accessibility_date_picker_year">"Year"</string>
+    <string name="accessibility_datetime_picker_date">"Date"</string>
+    <string name="accessibility_datetime_picker_time">"Time"</string>
+    <string name="accessibility_time_picker_ampm">"AM/PM"</string>
+    <string name="accessibility_time_picker_hour">"Hour"</string>
+    <string name="accessibility_time_picker_milli">"Millisecond"</string>
+    <string name="accessibility_time_picker_minute">"Minute"</string>
+    <string name="accessibility_time_picker_second">"Second"</string>
+    <string name="app_name">ui_res</string>
+    <string name="autofill_keyboard_accessory_content_description">"Suggestions available"</string>
+    <string name="autofill_popup_content_description">"Showing autofill popup"</string>
+    <string name="copy_to_clipboard_failure_message">"Failed to copy to the clipboard"</string>
+    <string name="date_picker_dialog_clear">"Clear"</string>
+    <string name="date_picker_dialog_other_button_label">"Other"</string>
+    <string name="date_picker_dialog_set">"Set"</string>
+    <string name="date_picker_dialog_title">"Set date"</string>
+    <string name="date_time_picker_dialog_title">"Set date and time"</string>
+    <string name="low_memory_error">"Unable to complete previous operation due to low memory"</string>
+    <string name="month_picker_dialog_title">"Set month"</string>
+    <string name="opening_file_error">"Failed to open selected file"</string>
+    <string name="password_generation_popup_content_description">"Showing password generation popup"</string>
+    <string name="photo_picker_browse">"Browse"</string>
+    <string name="photo_picker_camera">"Camera"</string>
+    <string name="photo_picker_select_images">"Select images"</string>
+    <string name="time_picker_dialog_am">"AM"</string>
+    <string name="time_picker_dialog_hour_minute_separator">":"</string>
+    <string name="time_picker_dialog_minute_second_separator">":"</string>
+    <string name="time_picker_dialog_pm">"PM"</string>
+    <string name="time_picker_dialog_second_subsecond_separator">"."</string>
+    <string name="time_picker_dialog_title">"Set time"</string>
+    <string name="updating_chrome">"Updating Chrome…"</string>
+    <string name="week_picker_dialog_title">"Set week"</string>
+    <declare-styleable name="ButtonCompat">
+        <attr format="reference|color" name="buttonColor"/>
+        <attr format="boolean" name="buttonRaised"/>
+    </declare-styleable>
+    <declare-styleable name="DualControlLayout">
+        <attr format="reference" name="stackedMargin"/>
+        <attr format="reference|string" name="primaryButtonText"/>
+        <attr format="reference|string" name="secondaryButtonText"/>
+        <attr format="enum" name="buttonAlignment">
+            <enum name="start" value="0"/>
+            <enum name="end" value="1"/>
+            <enum name="apart" value="2"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="TextViewWithLeading">
+        <attr format="reference|dimension" name="leading"/>
+    </declare-styleable>
+</resources>
