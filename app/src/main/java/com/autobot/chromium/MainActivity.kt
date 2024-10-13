@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.autobot.chromium.database.ViewModel
+import com.autobot.chromium.database.MainViewModel
 import com.autobot.chromium.theme.MyAppThemeComposable
 import com.autobot.chromium.ui.HomePage
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ import kotlinx.serialization.Serializable
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val mainViewModel: ViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +43,6 @@ class MainActivity : ComponentActivity() {
 
 
                         composable<HomePage> {HomePage(
-                                viewModel = mainViewModel
 //                                onSignUpClick = { userData ->
 //                                    navController.navigate(
 //                                        NavScreenCreateRoom(

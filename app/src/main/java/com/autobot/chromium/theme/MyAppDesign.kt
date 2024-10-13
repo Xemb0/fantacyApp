@@ -73,7 +73,7 @@ data class MyAppTypo(
 //         onTertiary = Color(0xFF0A0C19),
          myText = Color(0xFF0A0C19),
 
-            tertiaryDark = Color(0x8888888B),
+         tertiaryDark = Color(0x8888888B),
      )
  }
 

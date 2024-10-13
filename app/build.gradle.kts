@@ -17,7 +17,7 @@ android {
 
     defaultConfig {
         applicationId = "com.autobot.chromium"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -127,6 +127,8 @@ dependencies {
 
     // Retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0") // Retrofit converter for serialization
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0") // Retrofit core
 
 }

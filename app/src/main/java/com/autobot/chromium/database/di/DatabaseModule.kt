@@ -1,6 +1,7 @@
 package com.autobot.chromium.database.di
 
 import android.content.Context
+import com.autobot.chromium.database.ApiService
 import com.autobot.chromium.database.Repository
 import com.autobot.chromium.database.UserDao
 import dagger.Module
@@ -26,7 +27,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideBrowserRepository(tabDao: UserDao): Repository {
-        return Repository(tabDao)
+    fun provideBrowserRepository(apiService: ApiService): Repository {
+        return Repository(apiService)
     }
 }
