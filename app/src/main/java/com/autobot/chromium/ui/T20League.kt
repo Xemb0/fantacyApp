@@ -57,6 +57,7 @@ import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
 
 @Composable
@@ -381,12 +382,31 @@ fun calculateTimeRemaining(epochMillis: Long): String {
     }
 }
 fun formatStartDate(epochMillis: Long): String {
-    val instant = Instant.ofEpochMilli(epochMillis)
-    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a") // Format with AM/PM
+    val now = Instant.now()
+    val matchTime = Instant.ofEpochMilli(epochMillis)
+    val daysDifference = ChronoUnit.DAYS.between(now, matchTime)
+    val dayOfWeek = matchTime.atZone(ZoneId.systemDefault()).dayOfWeek
+    val formattedDayOfWeek = dayOfWeek.name.lowercase().replaceFirstChar { it.uppercase() }
+
+    // Format time with AM/PM in uppercase
+    val timeFormatter = DateTimeFormatter.ofPattern("hh:mm a")
         .withZone(ZoneId.systemDefault())
 
-    return formatter.format(instant)
+    val formattedTime = timeFormatter.format(matchTime).uppercase() // Ensures AM/PM is uppercase
+
+    return when {
+        daysDifference == 0L -> "Today, $formattedTime"
+        daysDifference == 1L -> "Tomorrow, $formattedTime"
+        daysDifference in 2..6 -> "$formattedDayOfWeek, $formattedTime" // Show day and time
+        else -> {
+            // If more than 7 days away, return full date with time in AM/PM
+            val fullFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a")
+                .withZone(ZoneId.systemDefault())
+            fullFormatter.format(matchTime).uppercase() // Ensures AM/PM is uppercase
+        }
+    }
 }
+
 
 
 

@@ -1,5 +1,6 @@
 package com.autobot.chromium.ui
 
+import ShimmerEffect
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -46,9 +47,8 @@ import com.autobot.chromium.theme.myText
 import com.autobot.chromium.theme.secondary
 import kotlinx.coroutines.delay
 
-
-fun LazyListScope.UpcomingMatches(upcomingMatches: UpcomingMatches?) {
-    item{
+fun LazyListScope.UpcomingMatches(upcomingMatches: UpcomingMatches?, isLoading: Boolean) {
+    item {
         Text(
             text = "Upcoming Matches",
             modifier = Modifier
@@ -59,24 +59,34 @@ fun LazyListScope.UpcomingMatches(upcomingMatches: UpcomingMatches?) {
             fontWeight = FontWeight.W600
         )
     }
-    if (upcomingMatches != null) {
-        items(upcomingMatches.matchList.size) {
-            val match = upcomingMatches.matchList[it]
-            UpcomingMatchCard(
-                startsAt = match.startsAt.toString(),
-                matchOffer = match.matchOffers,
-                matchFormat = match.matchFormat,
-                tournamentName = match.tournamentName,
-                status = match.status,
-                teamA = match.teams.a.code,
-                teamB = match.teams.b.code,
-                teamAImageUrl = match.teams.a.logoUrl,
-                teamBImageUrl = match.teams.b.logoUrl,
-                lineUpOut = match.metadata.isLineupOut
-            )
+
+    if (isLoading) {
+        // Display multiple shimmer items while loading
+        items(5) {
+            ShimmerEffect(Modifier.padding(vertical = 8.dp, horizontal = 16.dp).height(120.dp))
+        }
+    } else {
+        // Display upcoming matches if not loading
+        upcomingMatches?.let { matches ->
+            items(matches.matchList.size) {
+                val match = matches.matchList[it]
+                UpcomingMatchCard(
+                    startsAt = match.startsAt.toString(),
+                    matchOffer = match.matchOffers,
+                    matchFormat = match.matchFormat,
+                    tournamentName = match.tournamentName,
+                    status = match.status,
+                    teamA = match.teams.a.code,
+                    teamB = match.teams.b.code,
+                    teamAImageUrl = match.teams.a.logoUrl,
+                    teamBImageUrl = match.teams.b.logoUrl,
+                    lineUpOut = match.metadata.isLineupOut
+                )
+            }
         }
     }
 }
+
 
 @Composable
 fun UpcomingMatchCard(

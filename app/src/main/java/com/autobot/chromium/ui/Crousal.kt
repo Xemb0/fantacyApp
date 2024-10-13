@@ -127,7 +127,7 @@ fun MatchCard(
     teamBImageUrl: String,  // URL for team B's logo
     joinings: String,       // Number of joinings
     contests: String,       // Contest details
-    topRunningRank: String  // Top running rank
+    topRunningRank: String?  // Top running rank
 ) {
     Card(
         modifier = Modifier
@@ -252,15 +252,25 @@ fun MatchCard(
                         painter = painterResource(id = R.drawable.ic_badge),
                         contentDescription = "Rank Icon",
                     )
-                    Text(" TOP RUNNING RANK : ", color = Color.Gray, fontSize = 9.sp, fontWeight = FontWeight.W900 ,maxLines = 1, overflow = TextOverflow.Ellipsis)
-                    Text(
-                        text = if (topRunningRank.length > 4) "${topRunningRank.take(4)}..." else topRunningRank,
-                        color = element,
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.W900,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                    if (!topRunningRank.isNullOrEmpty() && topRunningRank.matches(Regex("\\d+"))) {
+                        Text(
+                            text = "TOP RUNNING RANK : ",
+                            color = Color.Gray,
+                            fontSize = 9.sp,
+                            fontWeight = FontWeight.W900,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Text(
+                            text = if (topRunningRank.length > 4) "${topRunningRank.take(4)}..." else topRunningRank,
+                            color = element, // Ensure 'element' is defined
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.W900,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+
                 }
             }
         }

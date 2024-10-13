@@ -1,4 +1,6 @@
 package com.autobot.chromium.ui
+import ShimmerEffect
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -12,42 +14,43 @@ import com.autobot.chromium.database.MainViewModel
 fun HomeContent() {
     val viewModel: MainViewModel = hiltViewModel()
     val upcomingMatches = viewModel.upcomingMatches.collectAsStateWithLifecycle().value
-    viewModel.userMatches
     val userMatches = viewModel.userMatches.collectAsStateWithLifecycle().value
     val featuredTournament = viewModel.featuredTournament.collectAsStateWithLifecycle().value
     val offerBanners = viewModel.currentOffers.collectAsStateWithLifecycle().value
+    val isLoading = viewModel.isLoading.collectAsStateWithLifecycle().value
 
     LazyColumn(
-        modifier = Modifier
+        modifier = Modifier.fillMaxSize() // Fill the maximum size available
     ) {
-        item {
-            if (userMatches != null) {
-                if(userMatches.match_list.isNotEmpty()){
+        // Display a loading indicator if the data is still loading
+        if (isLoading) {
+            item {
+                ShimmerEffect()
+            }
+        } else {
+            // Only show content when it's loaded
+            item {
+                if (userMatches?.match_list?.isNotEmpty() == true) {
                     Crousal()
                 }
             }
-        }
 
-        item {
-            if (offerBanners != null) {
-                if(offerBanners.offer_list.isNotEmpty()){
-                    InfiniteOffersBannerCarousel(modifier = Modifier.height(200.dp)) // Ensure this has a fixed height
+            item {
+                if (offerBanners?.offer_list?.isNotEmpty() == true) {
+                    InfiniteOffersBannerCarousel(modifier = Modifier.height(200.dp))
                 }
             }
-        }
-        item{
-            if (featuredTournament != null) {
-                if(featuredTournament.matchList.isNotEmpty()){
+
+            item {
+                if (featuredTournament?.matchList?.isNotEmpty() == true) {
                     T20LeagueCardRow()
                 }
             }
+
+
+                UpcomingMatches(upcomingMatches = upcomingMatches, isLoading)
+
         }
-
-        UpcomingMatches(upcomingMatches = upcomingMatches)
-
     }
 }
-
-
-
 
